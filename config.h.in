@@ -1,0 +1,6 @@
+#ifndef TL_CONFIG_HH
+#define TL_CONFIG_HH
+
+#cmakedefine USE_QT5
+
+#endif // TL_CONFIG_HH

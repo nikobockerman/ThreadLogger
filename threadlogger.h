@@ -1,14 +1,18 @@
 #ifndef THREADLOGGER_HH
 #define THREADLOGGER_HH
 
+#include <sstream>
+#include "loggable.h"
+#include "config.h"
+
+#ifdef USE_QT5
 #include <QExplicitlySharedDataPointer>
 #include <QString>
 
-#include <sstream>
-#include "loggable.h"
-
+class QDateTime;
 class QTextStream;
 class QFile;
+#endif
 
 namespace threadlogger {
 

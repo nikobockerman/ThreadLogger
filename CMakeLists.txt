@@ -8,20 +8,25 @@ set(CMAKE_AUTOMOC ON)
 # to always look for includes there:
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+
+# Whether to support Qt5 or not
+option(USE_QT5 "Use Qt5" ON)
+
+# Compile target. Default to Debug.
 if (NOT CMAKE_BUILD_TYPE)
   set (CMAKE_BUILD_TYPE "Debug" CACHE STRING
       "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel."
       FORCE)
 endif (NOT CMAKE_BUILD_TYPE)
 
+# Compile options.
 set (CMAKE_CXX_FLAGS "-std=c++0x -pedantic -Wall -Wextra -Werror -pthread" CACHE STRING
     "g++ Compiler Flags for All Builds" FORCE)
 set (CMAKE_CXX_FLAGS_DEBUG "-g" CACHE STRING
     "g++ Compiler Flags for Debug Builds" FORCE)
 
+# Force cmake to create verbose makefile
 set (CMAKE_VERBOSE_MAKEFILE on)
-
-find_package(Qt5Core REQUIRED)
 
 SET(LIBRARY_SOURCES
     threadlogger.h threadlogger.cpp
@@ -30,4 +35,14 @@ SET(LIBRARY_SOURCES
 )
 
 add_library (threadlogger ${LIBRARY_SOURCES})
-qt5_use_modules(threadlogger Core)
+
+# Qt5 library
+if (USE_QT5)
+    find_package(Qt5Core REQUIRED)
+    qt5_use_modules(threadlogger Core)
+    message(STATUS "Qt5 dependency is used.")
+else (USE_QT5)
+    message(FATAL_ERROR "Qt5 is currently not an optional dependency.")
+endif (USE_QT5)
+
+configure_file(${CMAKE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/config.h)
