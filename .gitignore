@@ -4,3 +4,6 @@
 
 # CMake build directory
 /build/
+
+# Qt Creator files
+/CMakeLists.txt.user
