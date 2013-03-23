@@ -581,6 +581,13 @@ LogInstance lDebug(const char *callerName)
     return lDebug(QString::fromLatin1(callerName));
 }
 
+LogInstance lDebug(const Loggable &caller)
+{
+    return lDebug(caller.className());
+}
+
+
+
 
 // lVerbose
 
@@ -603,6 +610,11 @@ LogInstance lVerbose(const std::string &callerName)
 LogInstance lVerbose(const char *callerName)
 {
     return lVerbose(QString::fromLatin1(callerName));
+}
+
+LogInstance lVerbose(const Loggable &caller)
+{
+    return lVerbose(caller.className());
 }
 
 
@@ -630,6 +642,11 @@ LogInstance lInfo(const char *callerName)
     return lInfo(QString::fromLatin1(callerName));
 }
 
+LogInstance lInfo(const Loggable &caller)
+{
+    return lInfo(caller.className());
+}
+
 
 
 // lMandatory
@@ -655,6 +672,11 @@ LogInstance lMandatory(const char *callerName)
     return lMandatory(QString::fromLatin1(callerName));
 }
 
+LogInstance lMandatory(const Loggable &caller)
+{
+    return lMandatory(caller.className());
+}
+
 
 
 // lError
@@ -678,6 +700,11 @@ LogInstance lError(const std::string &callerName)
 LogInstance lError(const char *callerName)
 {
     return lError(QString::fromLatin1(callerName));
+}
+
+LogInstance lError(const Loggable &caller)
+{
+    return lError(caller.className());
 }
 
 

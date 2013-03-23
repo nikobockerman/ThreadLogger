@@ -5,6 +5,7 @@
 #include <QString>
 
 #include <sstream>
+#include "loggable.h"
 
 class QTextStream;
 class QFile;
@@ -158,6 +159,7 @@ LogInstance lDebug();
 LogInstance lDebug(const QString &callerName);
 LogInstance lDebug(const std::string &callerName);
 LogInstance lDebug(const char* callerName);
+LogInstance lDebug(const threadlogger::Loggable &caller);
 
 
 /**
@@ -174,6 +176,7 @@ LogInstance lVerbose();
 LogInstance lVerbose(const QString &callerName);
 LogInstance lVerbose(const std::string &callerName);
 LogInstance lVerbose(const char* callerName);
+LogInstance lVerbose(const threadlogger::Loggable &caller);
 
 
 /**
@@ -190,6 +193,7 @@ LogInstance lInfo();
 LogInstance lInfo(const QString &callerName);
 LogInstance lInfo(const std::string &callerName);
 LogInstance lInfo(const char* callerName);
+LogInstance lInfo(const threadlogger::Loggable &caller);
 
 /**
  * @brief Same as lDebug() with verbosity level Mandatory.
@@ -205,6 +209,7 @@ LogInstance lMandatory();
 LogInstance lMandatory(const QString &callerName);
 LogInstance lMandatory(const std::string &callerName);
 LogInstance lMandatory(const char* callerName);
+LogInstance lMandatory(const threadlogger::Loggable &caller);
 
 /**
  * @brief Same as lDebug() with verbosity level Error.
@@ -220,6 +225,7 @@ LogInstance lError();
 LogInstance lError(const QString &callerName);
 LogInstance lError(const std::string &callerName);
 LogInstance lError(const char* callerName);
+LogInstance lError(const threadlogger::Loggable &caller);
 
 /**
  * @brief Get LogInstance for logging with verbosity level Plaintext.

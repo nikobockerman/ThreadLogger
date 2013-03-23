@@ -25,6 +25,7 @@ find_package(Qt5Core REQUIRED)
 
 SET(LIBRARY_SOURCES
     threadlogger.h threadlogger.cpp
+    loggable.h
     compiler_check.h
 )
 
