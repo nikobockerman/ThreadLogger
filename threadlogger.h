@@ -61,6 +61,7 @@ public:
     LogInstance &operator <<(const QString &t);
     LogInstance &operator <<(const unsigned int &t);
     LogInstance &operator <<(const int &t);
+    LogInstance& operator<<(const QDateTime &t);
 
     /**
      * @brief operator << for logging std::endl

@@ -489,6 +489,13 @@ LogInstance &LogInstance::operator <<(const unsigned int &t)
 }
 
 
+LogInstance &LogInstance::operator<<(const QDateTime &t)
+{
+    *d << t.toString(Qt::ISODate);
+    return *this;
+}
+
+
 LogInstance &LogInstance::operator <<(std::ostream &endl(std::ostream &os))
 {
     *d << endl;
