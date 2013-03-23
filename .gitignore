@@ -1,6 +1,7 @@
 # KDevelop4 files
 /.kdev4/
 /ThreadLogger.kdev4
+/threadlogger.kdev4
 
 # CMake build directory
 /build/
