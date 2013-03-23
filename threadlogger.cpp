@@ -571,6 +571,15 @@ LogInstance lDebug(const QString &callerName)
     return Log::log().instance(callerName, LogLevel::DEBUG);
 }
 
+LogInstance lDebug(const std::string &callerName)
+{
+    return lDebug(QString::fromStdString(callerName));
+}
+
+LogInstance lDebug(const char *callerName)
+{
+    return lDebug(QString::fromLatin1(callerName));
+}
 
 
 // lVerbose
@@ -584,6 +593,16 @@ LogInstance lVerbose()
 LogInstance lVerbose(const QString &callerName)
 {
     return Log::log().instance(callerName, LogLevel::VERBOSE);
+}
+
+LogInstance lVerbose(const std::string &callerName)
+{
+    return lVerbose(QString::fromStdString(callerName));
+}
+
+LogInstance lVerbose(const char *callerName)
+{
+    return lVerbose(QString::fromLatin1(callerName));
 }
 
 
@@ -601,6 +620,16 @@ LogInstance lInfo(const QString &callerName)
     return Log::log().instance(callerName, LogLevel::INFO);
 }
 
+LogInstance lInfo(const std::string &callerName)
+{
+    return lInfo(QString::fromStdString(callerName));
+}
+
+LogInstance lInfo(const char *callerName)
+{
+    return lInfo(QString::fromLatin1(callerName));
+}
+
 
 
 // lMandatory
@@ -614,6 +643,16 @@ LogInstance lMandatory()
 LogInstance lMandatory(const QString &callerName)
 {
     return Log::log().instance(callerName, LogLevel::MANDATORY);
+}
+
+LogInstance lMandatory(const std::string &callerName)
+{
+    return lMandatory(QString::fromStdString(callerName));
+}
+
+LogInstance lMandatory(const char *callerName)
+{
+    return lMandatory(QString::fromLatin1(callerName));
 }
 
 
@@ -631,6 +670,16 @@ LogInstance lError(const QString &callerName)
     return Log::log().instance(callerName, LogLevel::ERROR);
 }
 
+LogInstance lError(const std::string &callerName)
+{
+    return lError(QString::fromStdString(callerName));
+}
+
+LogInstance lError(const char *callerName)
+{
+    return lError(QString::fromLatin1(callerName));
+}
+
 
 
 // lPlaintext
@@ -639,7 +688,6 @@ LogInstance lPlaintext()
 {
     return Log::log().instance(QString(), LogLevel::PLAINTEXT);
 }
-
 
 
 }
