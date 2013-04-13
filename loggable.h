@@ -1,6 +1,8 @@
 #ifndef LOGGABLE_H
 #define LOGGABLE_H
 
+#include <string>
+
 namespace threadlogger {
 
 class Loggable
