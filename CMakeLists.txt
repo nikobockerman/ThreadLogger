@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.8)
+cmake_minimum_required(VERSION 2.8.7)
 project(ThreadLogger)
 
 # Tell CMake to run moc when necessary:
@@ -39,7 +39,11 @@ add_library (threadlogger ${LIBRARY_SOURCES})
 # Qt5 library
 if (USE_QT5)
     find_package(Qt5Core REQUIRED)
-    qt5_use_modules(threadlogger Core)
+    include_directories(${Qt5Core_INCLUDE_DIRS})
+    add_definitions(${Qt5Core_DEFINITIONS})
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Core_EXECUTABLE_COMPILE_FLAGS}")
+    target_link_libraries(threadlogger ${Qt5Core_LIBRARIES})
+    #qt5_use_modules(threadlogger Core) # Only works in >=cmake-2.8.8
     message(STATUS "Qt5 dependency is used.")
 else (USE_QT5)
     message(FATAL_ERROR "Qt5 is currently not an optional dependency.")
