@@ -12,13 +12,4 @@ template<typename T> class loggable {
     }
 };
 
-namespace threadlogger {
-
-class Loggable
-{
-public:
-    virtual std::string className() const = 0;
-};
-
-}
 #endif // LOGGABLE_H
