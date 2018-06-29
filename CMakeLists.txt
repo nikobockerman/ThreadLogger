@@ -31,7 +31,6 @@ set (CMAKE_VERBOSE_MAKEFILE on)
 SET(LIBRARY_SOURCES
     threadlogger.h threadlogger.cpp
     loggable.h
-    compiler_check.h
 )
 
 add_library (threadlogger ${LIBRARY_SOURCES})

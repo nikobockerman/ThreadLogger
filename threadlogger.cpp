@@ -4,8 +4,6 @@ Niko Böckerman
 */
 #include "threadlogger.h"
 
-#include "compiler_check.h"
-
 #include <QSettings>
 #include <QStringList>
 #include <QReadWriteLock>
@@ -22,11 +20,7 @@ Niko Böckerman
 #include <mutex>
 #include <iostream>
 
-#if GCC_VERSION > 40700
 using threadid = std::thread::id;
-#else
-typedef std::thread::id threadid;
-#endif
 
 namespace threadlogger {
 
@@ -85,11 +79,7 @@ public:
      */
     Log value(const threadid &id);
 
-#if GCC_VERSION > 40700
     std::vector<Log> storage {};
-#else
-    std::vector<Log> storage;
-#endif
     QReadWriteLock lock;
 };
 
@@ -113,15 +103,9 @@ public:
     static bool addLog(Log &log);
     static Log log();
 
-#if GCC_VERSION > 40700
     QAtomicInt ref = 0;
     bool m_valid = false;
     QString m_threadName = QString();
-#else
-    QAtomicInt ref;
-    bool m_valid;
-    QString m_threadName;
-#endif
 
     threadid m_threadId;
     QFile m_logFile;
@@ -166,21 +150,12 @@ public:
     QString coutPrefix();
     QString commonPrefix();
 
-#if GCC_VERSION > 40700
     QAtomicInt ref = 0;
     bool m_valid = false;
     bool m_startedLogFile = false;
     bool m_startedCout = false;
     bool m_outputFile = false;
     bool m_outputCout = false;
-#else
-    bool m_valid;
-    QAtomicInt ref;
-    bool m_startedLogFile;
-    bool m_startedCout;
-    bool m_outputFile;
-    bool m_outputCout;
-#endif
 
     QString m_callerName;
     LogLevel m_verbosity;
@@ -296,18 +271,11 @@ bool m_valid = false;
 QString m_threadName = QString();
 
 LogPrivate::LogPrivate()
-#if GCC_VERSION < 40700
-    : ref{0}, m_valid{false}
-#endif
 {}
 
 
 LogPrivate::LogPrivate(const QString threadName)
-    :
-#if GCC_VERSION < 40700
-      ref{0},
-#endif
-      m_valid{true}, m_threadName{threadName}
+    : m_valid{true}, m_threadName{threadName}
 {}
 
 
@@ -322,10 +290,6 @@ LogPrivate::~LogPrivate()
 // LogInstancePrivate
 
 LogInstancePrivate::LogInstancePrivate()
-#if GCC_VERSION < 40700
-    : m_valid{false}, ref{0}, m_startedLogFile{false}, m_startedCout{false}, m_outputFile{false},
-      m_outputCout{false}
-#endif
 {}
 
 
@@ -334,9 +298,6 @@ LogInstancePrivate::LogInstancePrivate(const QString &callerName, const LogLevel
                                        const LogLevel &logFileLevel,
                                        const LogLevel &coutLevel)
     : m_valid{true},
-#if GCC_VERSION < 40700
-      ref{0}, m_startedLogFile{false}, m_startedCout{false},
-#endif
       m_outputFile{toInt(verbosity) >= toInt(logFileLevel)
                    or verbosity == LogLevel::PLAINTEXT},
       m_outputCout{toInt(verbosity) >= toInt(coutLevel)
